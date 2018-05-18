@@ -1,0 +1,50 @@
+FROM ubuntu:16.04
+
+ENV RDMODIR /srv/rdmo
+ENV RDMOAPPDIR /srv/rdmo/rdmo-app
+
+RUN apt update -y
+
+# install python3 and build dependencies
+RUN apt install -y \
+   python3 \
+   python3-dev \
+   python3-pip \
+   build-essential \
+   git \
+   libxml2-dev \
+   libxslt-dev \
+   zlib1g-dev \
+   pandoc \
+   curl \
+   vim \
+   mc
+
+# symbolic links
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/pip3 /usr/bin/pip
+
+# pip upgrade and rdmo installation
+RUN pip install --upgrade pip
+RUN pip install --upgrade wheel
+RUN pip install --upgrade setuptools
+
+# install nginx
+RUN apt install -y nginx
+
+# create and change user
+RUN useradd -m -d ${RDMODIR} -s /bin/bash rdmo
+RUN chown -R rdmo:rdmo ${RDMODIR}
+
+# copy, copy, copy
+COPY ./generic /
+COPY ./specific/nginx /
+
+# rename config file to make sure it gets copied correctly later by docker run
+RUN mv /tmp/local-template-sqlite.py  /tmp/local-template.py
+
+# check
+HEALTHCHECK --timeout=5s --interval=5s --retries=3 \
+   CMD curl -f http://localhost:80 || exit 1
+
+CMD ["/drun.sh"]

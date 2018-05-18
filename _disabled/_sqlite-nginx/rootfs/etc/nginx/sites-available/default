@@ -1,0 +1,13 @@
+# in /etc/nginx/sites-available/default  on Debian/Ubuntu
+# in /etc/nginx/conf.d/vhost.conf        on RHEL/CentOS
+server {
+    listen 80;
+    server_name YOURDOMAIN;
+
+    location / {
+        proxy_pass http://unix:/srv/rdmo/rdmo.sock;
+    }
+    location /static/ {
+        alias /srv/rdmo/rdmo-app/static_root/;
+    }
+}

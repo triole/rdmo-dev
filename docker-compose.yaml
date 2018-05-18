@@ -1,0 +1,43 @@
+version: "3.6"
+
+
+volumes:
+    volfiles:
+        driver_opts:
+            type: none
+            device: /home/olaf/aip/self/rdmo-dc/vol
+            o: bind
+    rdmosrc:
+        driver_opts:
+            type: none
+            device: /home/olaf/aip/github/rdmo
+            o: bind
+
+
+services:
+    postgres:
+        image: postgres
+        container_name: postgres
+        env_file:
+            - 'variables.env'
+
+    nginx:
+        build:
+            context: ./nginx
+        container_name: nginx
+        ports:
+            - "8101:8080"
+        depends_on:
+            - rdmo
+
+    rdmo:
+        build:
+            context: ./rdmo
+        container_name: rdmo
+        depends_on:
+            - postgres
+        volumes:
+            - volfiles:/vol/files
+            - rdmosrc:/vol/rdmo
+        env_file:
+            - 'variables.env'
