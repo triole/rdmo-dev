@@ -1,6 +1,7 @@
-FROM ubuntu:18.04
+FROM debian:9
 
 RUN apt update -y
+
 
 # install python3 and build dependencies
 RUN apt install -y \
@@ -13,6 +14,7 @@ RUN apt install -y \
     libxslt-dev \
     zlib1g-dev \
     pandoc \
+    procps \
     curl \
     vim
 

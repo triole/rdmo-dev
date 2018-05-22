@@ -2,15 +2,15 @@ version: "3.6"
 
 
 volumes:
-    volfiles:
-        driver_opts:
-            type: none
-            device: /home/olaf/aip/self/rdmo-dc/vol
-            o: bind
     rdmosrc:
         driver_opts:
             type: none
             device: /home/olaf/aip/github/rdmo
+            o: bind
+    rdmoapp:
+        driver_opts:
+            type: none
+            device: /srv/rdmo/rdmo-app
             o: bind
 
 
@@ -37,7 +37,7 @@ services:
         depends_on:
             - postgres
         volumes:
-            - volfiles:/vol/files
-            - rdmosrc:/vol/rdmo
+            - rdmosrc:/src/rdmo
+            - rdmoapp:/src/rdmo-app
         env_file:
             - 'variables.env'
