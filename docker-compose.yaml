@@ -40,6 +40,8 @@ services:
         container_name: rdmo
         depends_on:
             - postgres
+        ports:
+            - "8281:80"
         volumes:
             - rdmosrc:/src/rdmo
             - rdmoapp:/src/rdmo-app

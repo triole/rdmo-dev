@@ -28,17 +28,21 @@ function keepAlive(){
         while [ $(isUp) == "1" ]; do
             sleep 2
         done
-        cd ${RDMO_APP}
-        if [[ "${GUNICORN}" == "True" ]]; then
-            gunicorn --bind 0.0.0.0:80 \
-                config.wsgi:application \
-                --log-level info \
-                --access-logfile '/var/log/gunicorn_access.log' \
-                --error-logfile '/var/log/gunicorn_err.log'
-        else
-            python manage.py runserver 0.0.0.0:80
-        fi
+        runServer
     done
+}
+
+function runServer(){
+    cd ${RDMO_APP}
+    if [[ "${GUNICORN}" == "True" ]]; then
+        gunicorn --bind 0.0.0.0:80 \
+            config.wsgi:application \
+            --log-level info \
+            --access-logfile '/var/log/gunicorn_access.log' \
+            --error-logfile '/var/log/gunicorn_err.log'
+    else
+        python manage.py runserver 0.0.0.0:80
+    fi
 }
 
 
@@ -47,4 +51,9 @@ if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
     addRdmoUser
     installRdmo
 fi
-keepAlive
+
+if [[ "${DEVMODE}" == "True"]]; then
+    keepAlive
+else
+    runServer
+fi
