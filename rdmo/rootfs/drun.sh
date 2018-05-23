@@ -30,7 +30,11 @@ function keepAlive(){
         done
         cd ${RDMO_APP}
         if [[ "${GUNICORN}" == "True" ]]; then
-            gunicorn --bind 0.0.0.0:80 config.wsgi:application
+            gunicorn --bind 0.0.0.0:80 \
+                config.wsgi:application \
+                --log-level info \
+                --access-logfile '/var/log/gunicorn_access.log' \
+                --error-logfile '/var/log/gunicorn_err.log'
         else
             python manage.py runserver 0.0.0.0:80
         fi
