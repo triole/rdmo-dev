@@ -52,7 +52,7 @@ if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
     installRdmo
 fi
 
-if [[ "${DEVMODE}" == "True"]]; then
+if [[ "${DEVMODE}" == "True" ]]; then
     keepAlive
 else
     runServer
