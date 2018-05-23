@@ -20,5 +20,5 @@ python manage.py download_vendor_files
 pip install -r ${RDMO_APP}/requirements/gunicorn.txt
 python manage.py collectstatic --no-input
 
-chown -R rdmo:rdmo /srv/rdmo
+chown -R rdmo:rdmo ${RDMO_SRC}
 chown rdmo:rdmo /var/log/rdmo*

@@ -5,4 +5,5 @@ sudo docker volume rm \
     rdmo-dc_rdmosrc \
     rdmo-dc_volfiles
 
-sudo docker-compose up
+sudo docker-compose up -d
+sudo docker-compose logs -f 

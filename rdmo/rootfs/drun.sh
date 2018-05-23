@@ -29,7 +29,11 @@ function keepAlive(){
             sleep 2
         done
         cd ${RDMO_APP}
-        python manage.py runserver 0.0.0.0:80
+        if [[ "${GUNICORN}" == "True" ]]; then
+            gunicorn --bind 0.0.0.0:80 config.wsgi:application
+        else
+            python manage.py runserver 0.0.0.0:80
+        fi
     done
 }
 

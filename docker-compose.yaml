@@ -26,7 +26,11 @@ services:
             context: ./nginx
         container_name: nginx
         ports:
-            - "8101:8080"
+            - "8280:8280"
+        volumes:
+            - rdmoapp:/src/rdmo-app
+        env_file:
+            - 'variables.env'
         depends_on:
             - rdmo
 
