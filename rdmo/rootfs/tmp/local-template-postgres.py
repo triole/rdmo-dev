@@ -80,24 +80,25 @@ Allauth configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 '''
 
-# from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
-#
-# ACCOUNT = True
-# ACCOUNT_SIGNUP = True
-# SOCIALACCOUNT = False
-#
-# INSTALLED_APPS += [
-#     'allauth',
-#     'allauth.account',
+from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
+
+ACCOUNT = True
+ACCOUNT_SIGNUP = True
+ACCOUNT_TERMS_OF_USE = True
+SOCIALACCOUNT = False
+
+INSTALLED_APPS += [
+    'allauth',
+    'allauth.account',
 #     'allauth.socialaccount',
 #     'allauth.socialaccount.providers.facebook',
 #     'allauth.socialaccount.providers.github',
 #     'allauth.socialaccount.providers.google',
 #     'allauth.socialaccount.providers.orcid',
 #     'allauth.socialaccount.providers.twitter',
-# ]
-#
-# AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
+]
+
+AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
 
 '''
 LDAP, see also:

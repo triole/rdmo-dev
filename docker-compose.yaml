@@ -12,6 +12,11 @@ volumes:
             type: none
             device: /srv/rdmo/rdmo-app
             o: bind
+    rdmostatic:
+        driver_opts:
+            type: none
+            device: /srv/rdmo/rdmo-app
+            o: bind
 
 
 services:
@@ -28,6 +33,7 @@ services:
         ports:
             - "8280:8280"
         volumes:
+            - rdmosrc:/src/rdmo
             - rdmoapp:/src/rdmo-app
         env_file:
             - 'variables.env'

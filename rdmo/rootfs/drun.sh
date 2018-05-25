@@ -25,15 +25,19 @@ function installRdmo(){
 
 function keepAlive(){
     while true; do
-        while [ $(isUp) == "1" ]; do
-            sleep 2
+        while [[ $(isUp) == "1" ]]; do
+            sleep 4
         done
-        runServer
+        sleep 2
+        if [[ $(isUp) == "0" ]]; then
+            runServer
+        fi
     done
 }
 
 function runServer(){
     cd ${RDMO_APP}
+    python manage.py migrate
     if [[ "${GUNICORN}" == "True" ]]; then
         gunicorn --bind 0.0.0.0:80 \
             config.wsgi:application \
