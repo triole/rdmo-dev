@@ -22,6 +22,7 @@ function installRdmo(){
     /opt/install-rdmo-app.sh
     cp -f /tmp/local-template-postgres.py ${RDMO_APP}/config/settings/local.py
     cd ${RDMO_APP}
+    python manage.py migrate
     python manage.py create_admin_user
 }
 
@@ -38,8 +39,6 @@ function keepAlive(){
 }
 
 function runServer(){
-    cd ${RDMO_APP}
-    python manage.py migrate
     if [[ "${GUNICORN}" == "True" ]]; then
         gunicorn --bind 0.0.0.0:80 \
             config.wsgi:application \

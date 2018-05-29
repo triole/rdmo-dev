@@ -13,11 +13,12 @@ fi
 pip install -e ${RDMO_SRC}
 git clone https://github.com/rdmorganiser/rdmo-app ${RDMO_APP}
 cp /tmp/local-template-${db}.py ${RDMO_APP}/config/settings/local.py
-cd ${RDMO_APP}
-python manage.py create_admin_user
-python manage.py download_vendor_files
-pip install -r ${RDMO_APP}/requirements/gunicorn.txt
-python manage.py collectstatic --no-input
 
 chown -R rdmo:rdmo ${RDMO_SRC}
 chown rdmo:rdmo /var/log/rdmo*
+
+cd ${RDMO_APP}
+python manage.py download_vendor_files
+pip install -r ${RDMO_APP}/requirements/gunicorn.txt
+python manage.py collectstatic --no-input
+python manage.py create_admin_user

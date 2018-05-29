@@ -1,11 +1,15 @@
 #!/bin/bash
 
-cd ${RDMO_APPDIR}
+cd "${SRC}"
+git clone "https://github.com/rdmorganiser/rdmo-catalog" "rdmo-catalog"
+
+
+cd ${RDMO_APP}
 
 # as one liner
 # find  "/vol" -regex ".*catalog\/.*\.xml$" -exec ./manage.py import {} \;
 
-arr=($(find  "/vol" -regex ".*catalog\/.*\.xml$"))
+arr=($(find  "${SRC}" -regex ".*catalog\/.*\.xml$"))
 
 IFS=$'\n'
 sorted=($(sort <<<"${arr[*]}"))
