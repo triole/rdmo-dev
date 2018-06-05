@@ -57,6 +57,7 @@ if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
     installRdmo
 fi
 
+cd ${RDMO_APP}
 if [[ "${DEVMODE}" == "True" ]]; then
     keepAlive
 else
