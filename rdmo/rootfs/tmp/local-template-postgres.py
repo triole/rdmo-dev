@@ -241,7 +241,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOGGING_DIR, 'rdmo.log'),
-            'formatter': 'verbose'
+            'formatter': 'fullverbose'
         },
         'console': {
             'level': 'DEBUG',
