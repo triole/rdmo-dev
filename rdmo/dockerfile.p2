@@ -18,9 +18,10 @@ RUN apt install -y \
     curl \
     vim
 
-# symbolic links
-#RUN ln -s /usr/bin/python3 /usr/bin/python
-#RUN ln -s /usr/bin/pip3 /usr/bin/pip
+# tools
+RUN apt install -y \
+    postgresql \
+    postgresql-client
 
 # pip upgrade and rdmo installation
 RUN pip install --upgrade pip

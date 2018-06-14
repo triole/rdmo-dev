@@ -18,6 +18,11 @@ RUN apt install -y \
     curl \
     vim
 
+# tools
+RUN apt install -y \
+    postgresql \
+    postgresql-client
+
 # symbolic links
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
