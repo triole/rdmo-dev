@@ -4,7 +4,7 @@ if [[ "${1}" == "p2" ]]; then
     echo -e "\nBuilding python2 version...\n"
     cp -f ./rdmo/dockerfile.p2 ./rdmo/dockerfile
 else
-    echo "-e \nBuilding python3 version...\n"
+    echo -e "\nBuilding python3 version...\n"
     cp -f ./rdmo/dockerfile.p3 ./rdmo/dockerfile
 fi
 
