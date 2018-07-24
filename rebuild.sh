@@ -7,9 +7,15 @@ function set_python_interpreter(){
     tf="${scriptdir}rdmo/dockerfile"
     echo "" > "${tf}"
     while read p; do
-        var=$(echo "${p}" | grep -Po "^ENV\sPYINT=\"(?=python)")
-        if [[ -n ${var} ]]; then
-            echo ${var}${1}\" >> ${tf}
+        added="false"
+        pyint=$(echo "${p}" | grep -Po "^ENV\sPYINT=\"(?=python)")
+        pypip=$(echo "${p}" | grep -Po "^ENV\sPYPIP=\"(?=python-pip)")
+        if [[ -n ${pyint} ]]; then
+            echo ${pyint}${1}\" >> ${tf}
+            added="true"
+        elif [[ -n ${pypip} ]]; then
+            echo ${pypip}${2}\" >> ${tf}
+            added="true"
         else
             echo ${p} >> ${tf}
         fi
@@ -19,12 +25,12 @@ function set_python_interpreter(){
 
 # main
 # set python interpreter version
-if [[ "${1}" == "p2" ]]; then
+if [[ "${1}" =~ (2|p2|python2) ]]; then
     echo -e "\nBuilding python2 version...\n"
-    set_python_interpreter python2
+    set_python_interpreter python python-pip
 else
     echo -e "\nBuilding python3 version...\n"
-    set_python_interpreter python3
+    set_python_interpreter python3 python-pip3
 fi
 
 # build

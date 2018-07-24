@@ -1,14 +1,16 @@
 FROM debian:9
 
-RUN apt update -y
-
 ENV PYINT="python"
+ENV PYPIP="pip"
+
+
+RUN apt update -y
 
 # install python3 and build dependencies
 RUN apt install -y \
     ${PYINT} \
     ${PYINT}-dev \
-    ${PYINT}-pip \
+    python-${PYPIP} \
     build-essential \
     git \
     libxml2-dev \
@@ -24,10 +26,12 @@ RUN apt install -y \
     postgresql \
     postgresql-client
 
-# useful python tool
+# python tooling
 RUN pip install \
+    autoflake \
     isort \
-    pytest
+    pytest \
+    vulture
 
 # pip upgrade and rdmo installation
 RUN pip install --upgrade pip
