@@ -2,12 +2,13 @@ FROM debian:9
 
 RUN apt update -y
 
+ENV PYINT="python"
 
 # install python3 and build dependencies
 RUN apt install -y \
-    python \
-    python-dev \
-    python-pip \
+    ${PYINT} \
+    ${PYINT}-dev \
+    ${PYINT}-pip \
     build-essential \
     git \
     libxml2-dev \
@@ -22,6 +23,11 @@ RUN apt install -y \
 RUN apt install -y \
     postgresql \
     postgresql-client
+
+# useful python tool
+RUN pip install \
+    isort \
+    pytest
 
 # pip upgrade and rdmo installation
 RUN pip install --upgrade pip
