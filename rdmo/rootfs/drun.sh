@@ -25,6 +25,8 @@ function installRdmo(){
     cd ${RDMO_APP}
     python manage.py migrate
     python manage.py create_admin_user
+    # make dir for test logs
+    mkdir -p ${RDMO_SRC}/testing/log
 }
 
 function keepAlive(){
