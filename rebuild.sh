@@ -2,6 +2,15 @@
 
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
 
+# fetch coda binary
+loc_src="${HOME}/tools/mybins/x86_64/coda"
+dok_tfo="./rdmo/rootfs/bin/"
+if [[ -f "${loc_src}" ]]; then
+    mkdir -p "${dok_tfo}"
+    cp "${loc_src}" "${dok_tfo}"
+fi
+
+exit
 
 function set_python_interpreter(){
     tf="${scriptdir}rdmo/dockerfile"
