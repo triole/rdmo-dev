@@ -2,15 +2,14 @@
 
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
 
-# fetch coda binary
+function fetch_coda(){
 loc_src="${HOME}/tools/mybins/x86_64/coda"
 dok_tfo="./rdmo/rootfs/bin/"
 if [[ -f "${loc_src}" ]]; then
     mkdir -p "${dok_tfo}"
     cp "${loc_src}" "${dok_tfo}"
 fi
-
-exit
+}
 
 function set_python_interpreter(){
     tf="${scriptdir}rdmo/dockerfile"
@@ -34,6 +33,7 @@ function set_python_interpreter(){
 
 # main
 # set python interpreter version
+fetch_coda
 if [[ "${1}" =~ (2|p2|python2) ]]; then
     echo -e "\nBuilding python2 version...\n"
     set_python_interpreter python python-pip
