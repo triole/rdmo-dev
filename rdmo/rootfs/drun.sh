@@ -49,7 +49,7 @@ function runServer(){
             --access-logfile '/var/log/gunicorn_access.log' \
             --error-logfile '/var/log/gunicorn_err.log'
     else
-        python manage.py runserver 0.0.0.0:80
+        run-server.sh
     fi
 }
 

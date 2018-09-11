@@ -3,6 +3,8 @@ FROM debian:9
 ENV PYINT="python"
 ENV PYPIP="pip"
 
+ENV PATH="${PATH}:/opt"
+
 
 RUN apt update -y
 
