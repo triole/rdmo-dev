@@ -2,8 +2,6 @@
 
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
 
-<<<<<<< HEAD
-
 function fetch_coda(){
     loc_src="${HOME}/tools/mybins/x86_64/coda"
     dok_tfo="./rdmo/rootfs/bin/"
@@ -11,15 +9,6 @@ function fetch_coda(){
         mkdir -p "${dok_tfo}"
         cp -f ${loc_src}* ${dok_tfo}
     fi
-=======
-function fetch_coda(){
-loc_src="${HOME}/tools/mybins/x86_64/coda"
-dok_tfo="./rdmo/rootfs/bin/"
-if [[ -f "${loc_src}" ]]; then
-    mkdir -p "${dok_tfo}"
-    cp "${loc_src}" "${dok_tfo}"
-fi
->>>>>>> 3f275271a41bdbad929e906b17777aaf927cc3bd
 }
 
 function set_python_interpreter(){
