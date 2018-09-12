@@ -10,12 +10,12 @@ volumes:
     rdmoapp:
         driver_opts:
             type: none
-            device: /srv/rdmo/rdmo-app
+            device: /home/olaf/aip/github/rdmo-app
             o: bind
     rdmostatic:
         driver_opts:
             type: none
-            device: /srv/rdmo/rdmo-app
+            device: /home/olaf/aip/github/rdmo
             o: bind
 
 
