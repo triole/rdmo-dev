@@ -1,0 +1,15 @@
+#!/bin/bash
+
+args=${@}
+
+auth="Authorization: Token 6efe530eb10e3ce8d7dd7829a63152b428cc868d"
+url=$(echo "${args}" | grep -Po "(?<=http:\/\/localhost).*?\s")
+
+cmd="curl -sLH \"${auth}\" \"http://localhost:8280${url}\""
+
+echo -e "\nCMD: ${cmd}"
+echo -e "\nURL: ${url}"
+echo ""
+echo -n ${cmd} | xsel --clipboard
+eval ${cmd} | jq .
+echo ""

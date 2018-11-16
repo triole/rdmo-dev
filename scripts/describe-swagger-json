@@ -1,0 +1,24 @@
+#!/bin/bash
+
+f=$(find . -regex ".*\.json")
+
+arr=($(cat ${f} | jq "{paths}" | grep -Po "\/api.*(?=\/\")" | sort))
+
+
+function endpoint_type(){
+    echo "${1}" | grep -Po "(?<=\/api\/v1\/).+?(?=\/)"
+}
+
+
+
+for l in "${arr[@]}"; do
+
+    former_type=${current_type}
+    current_type=$(endpoint_type "${l}")
+
+    if [[ "${former_type}" != "${current_type}" ]]; then
+        echo ""
+    fi
+    echo "${l}"
+done
+echo ""
