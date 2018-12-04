@@ -1,0 +1,25 @@
+#!/bin/bash
+
+host="127.0.0.1"
+
+if [[ -z "${2}" ]]; then
+    echo -e "\nThe following commands are available:"
+    echo -e "  - push"
+    echo -e "  - pull or dump"
+    echo -e "\nBoth need a second arg. Either the file to inject or the one to write into.\n"
+    exit
+fi
+
+
+if [[ "${1}" == "push" ]]; then
+    dropdb ${POSTGRES_DB}
+    psql -h ${host} -p ${POSTGRES_PORT} \
+        -U ${POSTGRES_USER} ${POSTGRES_DB} \
+        -f "${2}"
+fi
+
+if [[ "${1}" =~ (pull|dump) ]]; then
+    pg_dump -h ${host} -p ${POSTGRES_PORT} \
+        -U ${POSTGRES_USER} ${POSTGRES_DB} \
+        -f "${2}"
+fi

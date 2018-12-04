@@ -21,7 +21,9 @@ volumes:
 
 services:
     postgres:
-        image: postgres
+        # image: postgres
+        build:
+            context: ./postgres
         container_name: postgres
         ports:
             - "6543:5432"

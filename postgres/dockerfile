@@ -1,0 +1,12 @@
+FROM postgres:latest
+
+ENV PATH="${PATH}:/opt"
+
+RUN apt update -y && apt install \
+    postgresql-client
+
+COPY ./rootfs /
+RUN chmod u+x /*.sh
+
+# not necessary, but for sake of clarity
+CMD ["postgres"]
