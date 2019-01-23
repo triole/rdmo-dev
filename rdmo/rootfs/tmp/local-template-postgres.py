@@ -1,6 +1,9 @@
 import os
 from . import BASE_DIR
 
+
+DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
+
 '''
 Debug mode, don't use this in production
 '''
