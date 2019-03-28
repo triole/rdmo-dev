@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dropdb -U rdmo rdmo
+createdb -U rdmo rdmo
