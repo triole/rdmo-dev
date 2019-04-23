@@ -55,6 +55,9 @@ function runServer(){
 
 
 # main
+ln -sf /usr/bin/pip3 /usr/bin/pip
+ln -sf /usr/bin/python3 /usr/bin/python
+
 if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
     addRdmoUser
     installRdmo
