@@ -5,17 +5,17 @@ volumes:
     rdmosrc:
         driver_opts:
             type: none
-            device: /home/ole/rolling/aip/github/rdmo
+            device: /home/olaf/rolling/aip/github/rdmo
             o: bind
     rdmoapp:
         driver_opts:
             type: none
-            device: /home/ole/rolling/aip/github/rdmo-app
+            device: /home/olaf/rolling/aip/github/rdmo-app
             o: bind
     rdmostatic:
         driver_opts:
             type: none
-            device: /home/ole/rolling/aip/github/rdmo
+            device: /home/olaf/rolling/aip/github/rdmo
             o: bind
 
 

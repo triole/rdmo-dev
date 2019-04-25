@@ -259,14 +259,18 @@ LOGGING = {
             'level': 'INFO',
         },
         'django.request': {
-            'handlers': ['mail_admins', 'error_log'],
+            # 'handlers': ['mail_admins', 'error_log'],
+            # 'level': 'ERROR',
+            # 'propagate': True
+            'handlers': ['console'],
             'level': 'ERROR',
-            'propagate': True
         },
         'rdmo': {
-            'handlers': ['rdmo_log'],
+            # 'handlers': ['rdmo_log'],
+            # 'level': 'DEBUG',
+            # 'propagate': False
+            'handlers': ['console'],
             'level': 'DEBUG',
-            'propagate': False
         }
     }
 }
