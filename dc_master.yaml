@@ -64,7 +64,7 @@ services:
         volumes:
             - rdmosrc:/src/rdmo
             - rdmoapp:/src/rdmo-app
-            - shed:/tools/shed
-            - mybins:/tools/mybins
+            - shed:/tools/shed:ro
+            - mybins:/tools/mybins:ro
         env_file:
             - 'variables.env'
