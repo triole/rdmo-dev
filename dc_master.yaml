@@ -17,7 +17,16 @@ volumes:
             type: none
             device: <HOME>/rolling/aip/github/rdmo
             o: bind
-
+    shed:
+        driver_opts:
+            type: none
+            device: <HOME>/tools/shed
+            o: bind
+    mybins:
+        driver_opts:
+            type: none
+            device: <HOME>/tools/mybins/x86_64
+            o: bind
 
 services:
     postgres:
@@ -55,5 +64,7 @@ services:
         volumes:
             - rdmosrc:/src/rdmo
             - rdmoapp:/src/rdmo-app
+            - shed:/tools/shed
+            - mybins:/tools/mybins
         env_file:
             - 'variables.env'

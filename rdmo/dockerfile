@@ -1,6 +1,6 @@
 FROM debian:9
 
-ENV PATH="${PATH}:/opt"
+ENV PATH="${PATH}:/opt:/tools/shed:/tools/mybins"
 
 RUN apt update -y
 
