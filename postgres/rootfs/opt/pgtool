@@ -12,7 +12,8 @@ fi
 
 
 if [[ "${1}" == "push" ]]; then
-    dropdb ${POSTGRES_DB}
+    dropdb -U ${POSTGRES_USER} ${POSTGRES_DB}
+    createdb -U ${POSTGRES_USER} ${POSTGRES_DB}
     psql -h ${host} -p ${POSTGRES_PORT} \
         -U ${POSTGRES_USER} ${POSTGRES_DB} \
         -f "${2}"
