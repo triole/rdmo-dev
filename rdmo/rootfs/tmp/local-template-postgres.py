@@ -2,6 +2,8 @@ import os
 from . import BASE_DIR
 
 
+VENDOR_CDN = False
+
 DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
 
 '''
@@ -18,7 +20,7 @@ SECRET_KEY = 'this is not a very secret key'
 '''
 The list of URLs und which this application available
 '''
-ALLOWED_HOSTS = ['localhost', 'ip6-localhost', '127.0.0.1', '[::1]', 'rdmo']
+ALLOWED_HOSTS = ['localhost', 'ip6-localhost', '0.0.0.0', '127.0.0.1', '[::1]', 'rdmo']
 
 '''
 The root url of your application, only needed when its not '/'
