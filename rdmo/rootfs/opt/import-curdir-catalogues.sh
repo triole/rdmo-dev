@@ -7,7 +7,7 @@ else
 fi
 
 curdir="$(pwd)"
-cd ${RDMO_APP}
+cd "${RDMO_APP}"
 
 arr=($(find "${curdir}" -regex ".*\.xml$" | sort))
 

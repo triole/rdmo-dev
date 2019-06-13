@@ -22,7 +22,7 @@ function installRdmo(){
     /opt/install-rdmo-app.sh
     cp -f /tmp/local-template-postgres.py ${RDMO_APP}/config/settings/local.py
     cp -f /tmp/local-testing-template.py ${RDMO_APP}/testing/config/settings/local.py
-    cd ${RDMO_APP}
+    cd "${RDMO_APP}"
     python manage.py migrate
     python manage.py create_admin_user
     # make dir for test logs
@@ -49,7 +49,8 @@ function runServer(){
             --access-logfile '/var/log/gunicorn_access.log' \
             --error-logfile '/var/log/gunicorn_err.log'
     else
-        run-server.sh
+        cd "${RDMO_APP}"
+        python manage.py runserver 0.0.0.0:80
     fi
 }
 
