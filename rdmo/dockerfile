@@ -44,8 +44,8 @@ RUN pip3 install --upgrade setuptools
 # postgres python dependency
 RUN pip3 install psycopg2
 
-# note: texlive-xetex is for pdf export only 1500MB, really!??
-# RUN apt install -y texlive-xetex
+# note: texlive-xetex 1500MB, required otherwise tests will break
+RUN apt install -y texlive-xetex
 
 # copy rootfs
 COPY ./rootfs /
