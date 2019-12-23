@@ -53,7 +53,7 @@ RUN chmod u+x /*.sh
 
 # check
 HEALTHCHECK --timeout=5s --interval=5s --retries=3 \
-   CMD curl -f http://localhost:80 || exit 1
+   CMD curl -f http://localhost:8080 || exit 1
 
 # running everything
 CMD ["/drun.sh"]
