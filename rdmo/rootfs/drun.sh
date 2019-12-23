@@ -21,6 +21,7 @@ function installRdmo(){
     echo "Installing rdmo..."
     /opt/install-rdmo-app.sh
     cp -f /tmp/local-template-postgres.py ${RDMO_APP}/config/settings/local.py
+    mkdir -p ${RDMO_APP}/testing/config/settings
     cp -f /tmp/local-testing-template.py ${RDMO_APP}/testing/config/settings/local.py
     cd "${RDMO_APP}"
     python manage.py migrate
@@ -43,14 +44,14 @@ function keepAlive(){
 
 function runServer(){
     if [[ "${GUNICORN}" == "True" ]]; then
-        gunicorn --bind 0.0.0.0:80 \
-            config.wsgi:application \
+        gunicorn --bind 0.0.0.0:8080 \
             --log-level info \
             --access-logfile '/var/log/gunicorn_access.log' \
-            --error-logfile '/var/log/gunicorn_err.log'
+            --error-logfile '/var/log/gunicorn_err.log' \
+            config.wsgi:application
     else
         cd "${RDMO_APP}"
-        python manage.py runserver 0.0.0.0:80
+        python manage.py runserver 0.0.0.0:8080
     fi
 }
 

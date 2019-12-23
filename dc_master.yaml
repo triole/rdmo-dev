@@ -60,7 +60,7 @@ services:
         depends_on:
             - postgres
         ports:
-            - "8281:80"
+            - "8281:8080"
         volumes:
             - rdmosrc:/src/rdmo
             - rdmoapp:/src/rdmo-app

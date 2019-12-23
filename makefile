@@ -2,14 +2,19 @@
 DC_MASTER="dc_master.yaml"
 DC_TEMP="docker-compose.yaml"
 
+CURDIR=$(shell pwd)
+
+
 all: prepare_yaml run_build tail_logs
 build: prepare_yaml run_build
 fromscratch: prepare_yaml run_remove run_build
 remove: run_remove
 
+
 prepare_yaml:
 	cat ${DC_MASTER} \
-		| sed 's|<HOME>|${HOME}|g' \
+		| sd -p "<HOME>" "${HOME}" \
+		| sd -p "<CURDIR>" "${CURDIR}" \
 		> ${DC_TEMP}
 
 run_build:
