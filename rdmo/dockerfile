@@ -34,6 +34,7 @@ RUN pip3 install \
     autoflake \
     isort \
     pytest \
+    net-tools \
     vulture
 
 # pip upgrade and rdmo installation

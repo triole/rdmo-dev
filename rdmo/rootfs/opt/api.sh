@@ -2,4 +2,4 @@
 
 url="${1}"
 
-curl -LH "Authorization: ${API_DEV_KEY}" "http://localhost:80/${url}"
+curl -sLH "Authorization: ${API_DEV_KEY}" "http://localhost:8080/${url}"
