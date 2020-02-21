@@ -14,13 +14,21 @@ cd ${RDMO_APP}
 # as one liner
 # find  "/vol" -regex ".*catalog\/.*\.xml$" -exec ./manage.py import {} \;
 
-arr=($(find  "${SRC}" -regex ".*catalog\/.*\.xml$"))
+arr=()
+if [[ "${1}" =~ noshared ]]; then
+    arr=($(
+        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort | grep -v "/shared/"
+    ))
+else
+    arr=($(
+        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort
+    ))
+fi
 
-IFS=$'\n'
-sorted=($(sort <<<"${arr[*]}"))
-unset IFS
+echo ${arr[@]}
 
+exit
 for i in "${sorted[@]}"; do
-   echo -e "Starting to import ${i}..."
-   python manage.py import "${i}" ${user}
+    echo -e "Starting to import ${i}..."
+    python manage.py import "${i}" ${user}
 done
