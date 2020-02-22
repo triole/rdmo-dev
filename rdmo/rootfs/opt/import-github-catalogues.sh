@@ -25,7 +25,7 @@ else
     ))
 fi
 
-for i in "${sorted[@]}"; do
+for i in "${arr[@]}"; do
     echo -e "Starting to import ${i}..."
     python manage.py import "${i}" ${user}
 done
