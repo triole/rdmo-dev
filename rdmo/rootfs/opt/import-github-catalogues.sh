@@ -6,10 +6,6 @@ else
     user=""
 fi
 
-echo $user
-
-exit
-
 cd "${SRC}"
 git clone "https://github.com/rdmorganiser/rdmo-catalog" "rdmo-catalog"
 
