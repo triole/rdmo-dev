@@ -1,10 +1,14 @@
 #!/bin/bash
 
-if [[ -n "${1}" ]]; then
+if ( [[ -n "${1}" ]] && [[ ! "${1}" =~ noshared ]] ); then
     user="--user ${1}"
 else
     user=""
 fi
+
+echo $user
+
+exit
 
 cd "${SRC}"
 git clone "https://github.com/rdmorganiser/rdmo-catalog" "rdmo-catalog"
