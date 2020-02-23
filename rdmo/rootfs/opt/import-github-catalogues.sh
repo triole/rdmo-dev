@@ -6,8 +6,11 @@ else
     user=""
 fi
 
+fol="rdmo-catalog"
 cd "${SRC}"
-git clone "https://github.com/rdmorganiser/rdmo-catalog" "rdmo-catalog"
+if [[ ! -d "${fol}" ]]; then
+    git clone "https://github.com/rdmorganiser/rdmo-catalog" "${fol}"
+fi
 
 cd ${RDMO_APP}
 
@@ -19,10 +22,12 @@ if [[ "${1}" =~ noshared ]]; then
     arr=($(
         find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort | grep -v "/shared/"
     ))
+    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort))
 else
     arr=($(
         find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort
     ))
+    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort | grep -v "/shared/"))
 fi
 
 for i in "${arr[@]}"; do
