@@ -1,4 +1,4 @@
-FROM debian:9
+FROM debian:latest
 
 ENV PATH="${PATH}:/opt:/tools/shed:/tools/mybins"
 
