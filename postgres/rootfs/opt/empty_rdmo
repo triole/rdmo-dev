@@ -1,10 +1,10 @@
 #!/bin/bash
 
-scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 content_tables_conf="${scriptdir}/content_tables.cfg"
 
 while read line; do
     cmd="${scriptdir}/pgtool empty_table \"${line}\""
     echo ${cmd}
     eval "${cmd}"
-done < "${content_tables_conf}"
+done <"${content_tables_conf}"

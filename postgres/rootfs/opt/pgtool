@@ -3,7 +3,7 @@
 host="127.0.0.1"
 arg2="${2}"
 
-function check_second_arg(){
+function check_second_arg() {
     if [[ -z "${arg2}" ]]; then
         echo -e "\nThe following commands are available:"
         echo -e "  - push [DB_FILE]"
