@@ -9,7 +9,7 @@ all: prepare_yaml run_build tail_logs
 build: prepare_yaml run_build
 fromscratch: prepare_yaml run_remove run_build
 remove: run_remove
-
+log: tail_logs
 
 prepare_yaml:
 	cat ${DC_MASTER} \
@@ -25,4 +25,4 @@ run_remove:
 	sudo docker-compose rm --force
 
 tail_logs:
-	sudo docker-compose logs -f
+	sudo docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'

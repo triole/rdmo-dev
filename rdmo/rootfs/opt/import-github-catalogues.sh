@@ -20,14 +20,14 @@ cd ${RDMO_APP}
 arr=()
 if [[ "${1}" =~ noshared ]]; then
     arr=($(
-        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort | grep -v "/shared/"
+        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort -f | grep -v "/shared/"
     ))
-    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort))
+    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort -f))
 else
     arr=($(
-        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort
+        find  "${SRC}" -regex ".*catalog\/.*\.xml$" | sort -f
     ))
-    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort | grep -v "/shared/"))
+    arr+=($(find  "${SRC}" -regex ".*catalog\/.*conditions.*\.xml$" | sort -f | grep -v "/shared/"))
 fi
 
 for i in "${arr[@]}"; do
