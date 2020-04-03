@@ -1,2 +1,5 @@
 tmp/
 docker-compose.yaml
+
+.env
+variables.env

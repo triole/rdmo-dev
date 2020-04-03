@@ -1,6 +1,8 @@
 import os
-from . import BASE_DIR
 
+from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS
+
+from . import BASE_DIR
 
 VENDOR_CDN = False
 
@@ -85,7 +87,6 @@ Allauth configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 '''
 
-from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
 
 ACCOUNT = True
 ACCOUNT_SIGNUP = True
