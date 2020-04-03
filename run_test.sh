@@ -4,6 +4,12 @@ scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 config="${scriptdir}/config.toml"
 
 arg="${1}"
+if [[ "${arg}" =~ (-h|--help) ]]; then
+    echo "Supports two args:"
+    echo -e "\t1st is the location, can be 'git' or 'local', default is 'local'"
+    echo -e "\t2nd is the branch, default is 'master'"
+fi
+
 branch="${2}"
 if [[ -z "${branch}" ]]; then
     branch="master"

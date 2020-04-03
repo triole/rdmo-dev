@@ -5,6 +5,7 @@ if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
 fi
 
 if [[ "${TESTMODE}" == "True" ]]; then
+    echo "Run tests"
     cd "${RDMO_SOURCE_MP}" && pytest
 else
     while true; do

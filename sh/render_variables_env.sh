@@ -41,7 +41,7 @@ fi
 if [[ "${testmode}" == "True" ]]; then
     echo "COMPOSE_PROJECT_NAME=rdmo-devtest" >"${env_project_name}"
 else
-    echo "COMPOSE_PROJECT_NAME=rdmo-test" >"${env_project_name}"
+    echo "COMPOSE_PROJECT_NAME=rdmo-dev" >"${env_project_name}"
 fi
 ac "TESTMODE=${testmode}"
 render "general"

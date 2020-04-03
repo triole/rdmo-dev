@@ -1,5 +1,4 @@
 #!/bin/bash
-
 mkdir -p "${RDMO_SOURCE_MP}"
 
 cd "${RDMO_SOURCE_MP}"
@@ -12,20 +11,21 @@ fi
 pip install -e "${RDMO_SOURCE_MP}"
 
 # git clone https://github.com/rdmorganiser/rdmo-app ${RDMO_APP_MP}
-cp -f \
-    "${HOME}/tpl/local-py-${DB}.py" \
-    "${RDMO_APP_MP}/config/settings/local.py"
+mkdir -p "${RDMO_SOURCE_MP}/config/settings"
+mkdir -p "${RDMO_SOURCE_MP}/testing/config/settings"
+mkdir -p "${RDMO_SOURCE_MP}/testing/log"
 
-cd ${RDMO_APP_MP}
+cp -f \
+    "${HOME}/tpl/local-py-${DATABASE}.py" \
+    "${RDMO_SOURCE_MP}/config/settings/local.py"
+
+cp -f \
+    "${HOME}/tpl/local-py-testing.py" \
+    "${RDMO_SOURCE_MP}/testing/config/settings/local.py"
+
+cd "${RDMO_APP_MP}"
 python manage.py makemigrations
 python manage.py migrate
 python manage.py download_vendor_files
 python manage.py collectstatic --no-input
 python manage.py create_admin_user
-
-mkdir -p ${RDMO_APP_MP}/testing/config/settings
-mkdir -p ${RDMO_SOURCE_MP}/testing/log
-
-cp -f \
-    "${HOME}/tpl/local-py-testing.py" \
-    "${RDMO_APP_MP}/testing/config/settings/local.py"

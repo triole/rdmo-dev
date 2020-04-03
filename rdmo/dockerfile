@@ -44,7 +44,7 @@ RUN rm -f /usr/bin/python \
 && ln -s /usr/bin/python3 /usr/bin/python
 
 # note: texlive-xetex 1500MB, required otherwise tests will break
-# RUN apt install -y texlive-xetex
+RUN apt install -y texlive-xetex
 
 COPY ./rootfs /
 
