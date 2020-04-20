@@ -11,13 +11,11 @@ fi
 pip install -e "${RDMO_SOURCE_MP}"
 
 # git clone https://github.com/rdmorganiser/rdmo-app ${RDMO_APP_MP}
-mkdir -p "${RDMO_SOURCE_MP}/config/settings"
-mkdir -p "${RDMO_SOURCE_MP}/testing/config/settings"
 mkdir -p "${RDMO_SOURCE_MP}/testing/log"
 
 cp -f \
     "${HOME}/tpl/local-py-${DATABASE}.py" \
-    "${RDMO_SOURCE_MP}/config/settings/local.py"
+    "${RDMO_APP_MP}/config/settings/local.py"
 
 cp -f \
     "${HOME}/tpl/local-py-testing.py" \
