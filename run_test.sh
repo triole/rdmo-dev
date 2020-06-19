@@ -8,6 +8,7 @@ if [[ "${arg}" =~ (-h|--help) ]]; then
     echo "Supports two args:"
     echo -e "\t1st is the location, can be 'git' or 'local', default is 'local'"
     echo -e "\t2nd is the branch, default is 'master'"
+    exit
 fi
 
 branch="${2}"

@@ -1,12 +1,20 @@
 import os
 
-from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS
+from django.utils.translation import ugettext_lazy
 
-from . import BASE_DIR
+from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS
 
 VENDOR_CDN = False
 
 DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
+
+LANGUAGE_CODE = 'de-de'
+TIME_ZONE = 'Europe/Berlin'
+LANGUAGES = (
+    ('en', ugettext_lazy('English')),
+    ('de', ugettext_lazy('German')),
+    ('fr', ugettext_lazy('French')),
+)
 
 '''
 Debug mode, don't use this in production
