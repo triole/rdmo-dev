@@ -2,11 +2,18 @@ import os
 
 from django.utils.translation import ugettext_lazy
 
-from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS
+from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS, PROJECT_EXPORTS, PROJECT_IMPORTS
 
 VENDOR_CDN = False
 
 DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
+
+import sys
+sys.path.append('/home/rdmo/rdmo-plugins')
+PROJECT_EXPORTS.append(('madmp', ugettext_lazy('as madmp'), 'exports.madmp.MaDMPExport'))
+PROJECT_EXPORTS.append(('datacite', ugettext_lazy('as datacite'), 'exports.datacite.DataCiteExport'))
+PROJECT_EXPORTS.append(('radar', ugettext_lazy('as radar'), 'exports.radar.RadarExport'))
+# PROJECT_IMPORTS.append(('xml', ugettext_lazy('from RDMP XML'), 'rdmo.projects.imports.RDMOXMLImport'))
 
 LANGUAGE_CODE = 'de-de'
 TIME_ZONE = 'Europe/Berlin'
