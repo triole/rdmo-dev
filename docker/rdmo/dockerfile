@@ -6,7 +6,7 @@ ENV GNAME=rdmo
 ENV GID=1000
 ENV HOME=/home/rdmo
 
-ENV PATH="${PATH}:/opt:/tools/shed:/tools/mybins:${HOME}/.local/bin"
+ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/tools/shed:/vol/tools/mybins"
 
 RUN apt update -y
 

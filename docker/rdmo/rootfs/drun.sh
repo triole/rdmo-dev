@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "$(pip freeze | grep "rdmo")" ]]; then
-    /opt/install-rdmo.sh
+    ${HOME}/sh/install-rdmo.sh
 fi
 
 if [[ "${TESTMODE}" == "True" ]]; then
