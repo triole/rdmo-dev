@@ -1,6 +1,5 @@
 CURDIR=$(shell pwd)
 CONFIG=${CURDIR}/config.toml
-DC_MASTER="dc_master.yaml"
 DC_TEMP="docker-compose.yaml"
 TEMPFILE="/tmp/rdmo-dev.tmp"
 
@@ -18,24 +17,19 @@ build: prepare_yaml run_build
 fromscratch: prepare_yaml run_remove run_build
 remove: run_remove
 log: tail_logs
-
 test: render_variables prepare_yaml
 
 render_variables:
-	./sh/render_variables_env.sh "${TESTMODE}" "${INSTALL_SOURCE}" "${BRANCH}"
+	./sh/prepare/render_variables_env.sh ${TESTMODE} ${INSTALL_SOURCE} ${BRANCH}
 
 prepare_yaml:
-	cat ${DC_MASTER} \
-		| sd -p "<HOME>" "${HOME}" \
-		| sd -p "<CURDIR>" "${CURDIR}" \
-		| sd -p "<RDMO_SOURCE_MP>" $(shell stoml ${CONFIG} rdmo.rdmo_source_mp) \
-		> ${DC_TEMP}
-		@# remove volume, if source not local
-		@if [ "${INSTALL_SOURCE}" != "${DEFAULT_INSTALL_SOURCE}" ]; then\
-			cat ${DC_TEMP} | grep -v "\- rdmosrc:" \
-				> "${TEMPFILE}" \
-			&& cp -f "${TEMPFILE}" "${DC_TEMP}";\
-    	fi
+	./sh/prepare/render_yaml.sh ${DC_TEMP} ${CONFIG}
+	@# remove volume, if source not local
+	@if [ "${INSTALL_SOURCE}" != "${DEFAULT_INSTALL_SOURCE}" ]; then\
+		cat ${DC_TEMP} | grep -v "\- rdmosrc:" \
+			> "${TEMPFILE}" \
+		&& cp -f "${TEMPFILE}" "${DC_TEMP}";\
+	fi
 
 run_build:
 	sudo docker-compose up --build -d

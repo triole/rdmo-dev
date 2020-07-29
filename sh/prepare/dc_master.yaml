@@ -4,7 +4,7 @@ services:
     postgres:
         # image: postgres
         build:
-            context: ./postgres
+            context: ./docker/postgres
         container_name: postgres
         ports:
             - "6543:5432"
@@ -13,7 +13,7 @@ services:
 
     rdmo:
         build:
-            context: ./rdmo
+            context: ./docker/rdmo
         container_name: rdmo
         depends_on:
             - postgres
@@ -21,9 +21,10 @@ services:
             - "8280:8080"
         volumes:
             - rdmosrc:<RDMO_SOURCE_MP>
-            - rdmoapp:/home/rdmo/rdmo-app
-            - shed:/tools/shed:ro
-            - mybins:/tools/mybins:ro
+            - rdmoapp:<RDMO_APP_MP>
+            - rdmoplugins:<RDMO_PLUGINS_MP>
+            - shed:<SHED_MP>:ro
+            - mybins:<MYBINS_MP>:ro
         env_file:
             - 'variables.env'
 
@@ -31,20 +32,25 @@ volumes:
     rdmosrc:
         driver_opts:
             type: none
-            device: <HOME>/rolling/aip/github/rdmo
+            device: <RDMO_SOURCE_FOL>
             o: bind
     rdmoapp:
         driver_opts:
             type: none
-            device: <HOME>/rolling/aip/github/rdmo-app
+            device: <RDMO_APP_FOL>
+            o: bind
+    rdmoplugins:
+        driver_opts:
+            type: none
+            device: <RDMO_PLUGINS_FOL>
             o: bind
     shed:
         driver_opts:
             type: none
-            device: <HOME>/tools/shed
+            device: <SHED_FOL>
             o: bind
     mybins:
         driver_opts:
             type: none
-            device: <HOME>/tools/mybins
+            device: <MYBINS_FOL>
             o: bind

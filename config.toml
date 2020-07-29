@@ -1,3 +1,21 @@
+[folders]
+rdmo_source = "<HOME>/rolling/aip/github/rdmo"
+rdmo_app = "<HOME>/rolling/aip/github/rdmo-app"
+rdmo_plugins = "<HOME>/rolling/aip/github/rdmo-plugins"
+shed = "<HOME>/tools/shed"
+mybins = "<HOME>/tools/mybins"
+
+[mountpoints]
+rdmo_source = "/home/rdmo/rdmo"
+rdmo_app = "/home/rdmo/rdmo-app"
+rdmo_plugins = "/home/rdmo/rdmo-plugins"
+shed = "/vol/tools/shed"
+mybins = "/vol/tools/mybins"
+
+[repos]
+rdmo = "https://github.com/rdmorganiser/rdmo.git"
+rdmo_catalog = "https://github.com/rdmorganiser/rdmo-catalog.git"
+
 [general]
 database = "postgres"
 
@@ -7,13 +25,5 @@ postgres_password = "admin"
 postgres_db = "rdmo"
 postgres_host = "postgres"
 postgres_port = 5432
-
-[rdmo]
 api_dev_key = "58114e78e6c3488247148a3e5c9e6fa462a9e4c9"
 install_source = "/home/rdmo/rdmo"
-rdmo_source_mp = "/home/rdmo/rdmo"
-rdmo_app_mp = "/home/rdmo/rdmo-app"
-
-[repos]
-rdmo = "https://github.com/rdmorganiser/rdmo.git"
-rdmo_catalog = "https://github.com/rdmorganiser/rdmo-catalog.git"

@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=$' '
 scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-basedir="$(echo "${scriptdir}" | grep -Po ".*(?=\/)")"
+basedir="$(echo "${scriptdir}" | grep -Po "^.*(?=/.*/)")"
 
 config="${basedir}/config.toml"
 env_variables="${basedir}/variables.env"
@@ -20,6 +20,7 @@ function getval() {
 }
 
 function render() {
+    suffix="${2}"
     ac "\n# ${1}"
     vals=($(getval "${1}"))
     for key in "${vals[@]}"; do
@@ -27,6 +28,9 @@ function render() {
         entry="$(getval "${1}.${key}")"
         if ([[ "${install_source}" != "default" ]] && [[ "${key}" == "install_source" ]]); then
             entry="${install_source}"
+        fi
+        if [[ -n "${suffix}" ]]; then
+            s="${s}${suffix}"
         fi
         s+="=${entry}"
         $(ac "${s}")
@@ -46,5 +50,6 @@ fi
 ac "TESTMODE=${testmode}"
 render "general"
 render "postgres"
-render "rdmo"
+render "mountpoints" "_MP"
+render "repos" "_REP"
 ac "BRANCH=${branch}"
