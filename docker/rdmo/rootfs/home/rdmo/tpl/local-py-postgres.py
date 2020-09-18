@@ -1,14 +1,23 @@
 import os
+import sys
 
 from django.utils.translation import ugettext_lazy
 
-from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS, PROJECT_EXPORTS, PROJECT_IMPORTS
+from rdmo.core.settings import (AUTHENTICATION_BACKENDS, INSTALLED_APPS,
+                                PROJECT_EXPORTS)
+
+from . import BASE_DIR
 
 VENDOR_CDN = False
 
 DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
 
-import sys
+'''
+Theme, see also:
+http://rdmo.readthedocs.io/en/latest/configuration/themes.html
+'''
+THEME_DIR = os.path.join(BASE_DIR, 'theme')
+
 sys.path.append('/home/rdmo/rdmo-plugins')
 PROJECT_EXPORTS.append(('madmp', ugettext_lazy('as madmp'), 'exports.madmp.MaDMPExport'))
 PROJECT_EXPORTS.append(('datacite', ugettext_lazy('as datacite'), 'exports.datacite.DataCiteExport'))
@@ -21,6 +30,7 @@ LANGUAGES = (
     ('en', ugettext_lazy('English')),
     ('de', ugettext_lazy('German')),
     ('fr', ugettext_lazy('French')),
+    ('it', ugettext_lazy('Italian')),
 )
 
 '''
@@ -174,12 +184,6 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.htm
 #
 # LOGIN_URL = '/Shibboleth.sso/Login?target=/projects'
 # LOGOUT_URL = '/Shibboleth.sso/Logout'
-
-'''
-Theme, see also:
-http://rdmo.readthedocs.io/en/latest/configuration/themes.html
-'''
-# THEME_DIR = os.path.join(BASE_DIR, 'theme')
 
 '''
 Export Formats
