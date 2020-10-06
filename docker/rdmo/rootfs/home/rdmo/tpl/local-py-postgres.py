@@ -12,18 +12,32 @@ VENDOR_CDN = False
 
 DEFAULT_URI_PREFIX = 'https://localhost/rdmo/test'
 
+# reference documents
+EXPORT_REFERENCE_DOCX = '/home/rdmo/rdmo-app/reference.docx'
+EXPORT_REFERENCE_ODT = '/home/rdmo/rdmo-app/reference.odt'
+
+EXPORT_REFERENCE_ODT_VIEWS = {
+    "https://rdmorganiser.github.io/terms/views/bielefeld": "/home/rdmo/rdmo-app/reference.odt"
+}
+
+EXPORT_REFERENCE_DOCX_VIEWS = {
+    "https://rdmorganiser.github.io/terms/views/bielefeld": "/home/rdmo/rdmo-app/reference.docx"
+}
+
 '''
 Theme, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/themes.html
 '''
 THEME_DIR = os.path.join(BASE_DIR, 'theme')
 
+# ex- and import plugins
 sys.path.append('/home/rdmo/rdmo-plugins')
 PROJECT_EXPORTS.append(('madmp', ugettext_lazy('as madmp'), 'exports.madmp.MaDMPExport'))
 PROJECT_EXPORTS.append(('datacite', ugettext_lazy('as datacite'), 'exports.datacite.DataCiteExport'))
 PROJECT_EXPORTS.append(('radar', ugettext_lazy('as radar'), 'exports.radar.RadarExport'))
 # PROJECT_IMPORTS.append(('xml', ugettext_lazy('from RDMP XML'), 'rdmo.projects.imports.RDMOXMLImport'))
 
+# languages
 LANGUAGE_CODE = 'de-de'
 TIME_ZONE = 'Europe/Berlin'
 LANGUAGES = (
