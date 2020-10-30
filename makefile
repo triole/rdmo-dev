@@ -3,7 +3,7 @@ CONFIG=${CURDIR}/config.toml
 DC_TEMP="docker-compose.yaml"
 TEMPFILE="/tmp/rdmo-dev.tmp"
 
-DEFAULT_INSTALL_SOURCE=$(shell stoml ${CONFIG} rdmo.install_source)
+DEFAULT_INSTALL_SOURCE=$(shell stoml ${CONFIG} rdmo.rdmo_source)
 INSTALL_SOURCE=${s}
 INSTALL_SOURCE=$(shell if [ -z "${s}" ]; then echo "${DEFAULT_INSTALL_SOURCE}"; else echo "${s}"; fi)
 

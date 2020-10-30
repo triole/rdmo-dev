@@ -1,0 +1,36 @@
+version: '3'
+output: 'group'
+
+vars:
+    CURDIR:
+        sh: pwd
+    CONFIG:
+        sh: echo "$(pwd)/config.toml"
+    DC_TEMP:
+        sh: echo "$(pwd)/docker-compose.yaml"
+    TEMPFILE: /tmp/rdmo-dev.tmp
+
+tasks:
+    default:
+        desc: build rdmo dockers
+        cmds:
+            - cmd: echo {{.TEMPFILE}}
+            - cmd: echo {{.CURDIR}}
+            - cmd: echo {{.CONFIG}}
+            - cmd: echo {{.SOURCE}}
+        vars:
+            SOURCE:
+                task: get_arg_source
+
+    get_arg_source:
+        desc: will get cli arg source
+        cmd: >-
+            if [[ -n "{{.s}}" ]]; then
+                echo {{.s}}
+            else
+                stoml {{.CONFIG}} rdmo.rdmo_source
+            fi
+
+    get_arg_branch:
+        cmd: >-
+            if [[ {{.s}} != "windows" ]]; then echo windows-command;fi
