@@ -1,5 +1,4 @@
 version: '3'
-output: 'group'
 
 vars:
     CURDIR:
@@ -9,28 +8,50 @@ vars:
     DC_TEMP:
         sh: echo "$(pwd)/docker-compose.yaml"
     TEMPFILE: /tmp/rdmo-dev.tmp
+    LOCAL_RDMO:
+        sh: stoml "$(pwd)/config.toml" folders.rdmo_source
+    REPO_RDMO:
+        sh: stoml "$(pwd)/config.toml" repos.rdmo
 
 tasks:
     default:
-        desc: build rdmo dockers
+        desc: default rdmo dockers build, from github master
         cmds:
-            - cmd: echo {{.TEMPFILE}}
-            - cmd: echo {{.CURDIR}}
-            - cmd: echo {{.CONFIG}}
-            - cmd: echo {{.SOURCE}}
-        vars:
-            SOURCE:
-                task: get_arg_source
+            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+            - cmd: ./sh/prepare/render_variables_env.sh .
+            - task: build_dockers
+            - task: log
 
-    get_arg_source:
-        desc: will get cli arg source
-        cmd: >-
-            if [[ -n "{{.s}}" ]]; then
-                echo {{.s}}
-            else
-                stoml {{.CONFIG}} rdmo.rdmo_source
-            fi
+    test:
+        desc: test local rdmo source
+        cmds:
+            - cmd: ./sh/prepare/render_yaml.sh "{{.DC_TEMP}}" "{{.CONFIG}}"
+            - cmd: >-
+                    ./sh/prepare/render_variables_env.sh . . test
+            - task: build_dockers
+            - task: log
 
-    get_arg_branch:
-        cmd: >-
-            if [[ {{.s}} != "windows" ]]; then echo windows-command;fi
+    testremote:
+        desc: test remote rdmo source
+        cmds:
+            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+            - cmd: >-
+                    ./sh/prepare/render_variables_env.sh
+                    "{{.REPO_RDMO}}" master test
+            - task: build_dockers
+            - task: log
+
+    build_dockers:
+        cmds:
+           - cmd: sudo docker-compose up --build -d
+
+    remove:
+        desc: remove rdmo's dockers
+        cmds:
+           - cmd: sudo docker-compose down --rmi all
+           - cmd: sudo docker-compose rm --force
+
+    log:
+        desc: tail logs
+        cmds:
+            - cmd: sudo docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'

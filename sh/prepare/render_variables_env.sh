@@ -7,9 +7,9 @@ config="${basedir}/config.toml"
 env_variables="${basedir}/variables.env"
 env_project_name="${basedir}/.env"
 
-testmode="${1}"
-install_source="${2}"
-branch="${3}"
+install_source="${1}"
+branch="${2}"
+testmode="${3}"
 
 function ac() {
     echo -e "${1}" >>"${env_variables}"
@@ -42,12 +42,14 @@ if [[ -f "${env_variables}" ]]; then
     rm "${env_variables}"
 fi
 
-if [[ "${testmode}" == "True" ]]; then
+tm="False"
+if [[ "${testmode}" == "test" ]]; then
     echo "COMPOSE_PROJECT_NAME=rdmo-devtest" >"${env_project_name}"
+    tm="True"
 else
     echo "COMPOSE_PROJECT_NAME=rdmo-dev" >"${env_project_name}"
 fi
-ac "TESTMODE=${testmode}"
+ac "TESTMODE=${tm}"
 render "general"
 render "postgres"
 render "mountpoints" "_MP"

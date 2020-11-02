@@ -7,13 +7,13 @@ function ec() {
     eval "${1}"
 }
 
-if [[ ("${RDMO_SOURCE_MP}" != "${INSTALL_SOURCE}") && -n "${INSTALL_SOURCE}" ]]; then
-    echo "Install rdmo from: ${INSTALL_SOURCE}"
+if [[ ("${INSTALL_SOURCE}" != ".") && -n "${INSTALL_SOURCE}" ]]; then
     ec "git clone \"${INSTALL_SOURCE}\" ."
     ec "git checkout \"${BRANCH}\""
     ec "git pull"
 fi
 ec "pip install -e \"${RDMO_SOURCE_MP}\""
+ec "git branch -v"
 
 # git clone https://github.com/rdmorganiser/rdmo-app ${RDMO_APP_MP}
 mkdir -p "${RDMO_SOURCE_MP}/testing/log"
