@@ -55,7 +55,7 @@ RUN groupadd -g "${GID}" "${GNAME}" \
  && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/nopasswd \
  && chmod 777 /var/log
 
-HEALTHCHECK --timeout=5s --interval=5s --retries=3 \
+HEALTHCHECK --timeout=5s --interval=600s --retries=3 \
    CMD curl -f http://localhost:8080 || kill -9 1
 
 USER "${USER}"
