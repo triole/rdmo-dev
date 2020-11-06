@@ -56,7 +56,7 @@ RUN groupadd -g "${GID}" "${GNAME}" \
  && chmod 777 /var/log
 
 HEALTHCHECK --timeout=5s --interval=5s --retries=3 \
-   CMD curl -f http://localhost:8080 || exit 1
+   CMD curl -f http://localhost:8080 || kill -9 1
 
 USER "${USER}"
 CMD ["/drun.sh"]
