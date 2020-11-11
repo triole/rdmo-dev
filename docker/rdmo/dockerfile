@@ -23,9 +23,7 @@ RUN apt install -y \
     zlib1g-dev \
     pandoc \
     procps \
-    sudo \
-    curl \
-    vim
+    sudo
 
 # postgres and its dependencies
 RUN apt install -y \
@@ -56,7 +54,7 @@ RUN groupadd -g "${GID}" "${GNAME}" \
  && chmod 777 /var/log
 
 HEALTHCHECK --timeout=5s --interval=600s --retries=3 \
-   CMD curl -f http://localhost:8080 || kill -9 1
+   CMD httpstat http://localhost:8080 || pkill -9 python
 
 USER "${USER}"
 CMD ["/drun.sh"]
