@@ -16,7 +16,7 @@ function check_second_arg() {
 
 cmdargs="-h ${host} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} ${POSTGRES_DB}"
 cmdpsql="psql ${cmdargs}"
-cmddump="pgdump ${cmdargs}"
+cmddump="pg_dump ${cmdargs}"
 
 if [[ "${1}" == "list" ]]; then
     cmd="${cmdpsql} -c \"\\dt\""
@@ -26,7 +26,7 @@ if [[ "${1}" == "push" ]]; then
     check_second_arg
     dropdb -U ${POSTGRES_USER} ${POSTGRES_DB}
     createdb -U ${POSTGRES_USER} ${POSTGRES_DB}
-    cmd="${cmdbase} -f \"${arg2}\""
+    cmd="${cmdpsql} -f \"${arg2}\""
 fi
 
 if [[ "${1}" =~ (pull|dump) ]]; then
