@@ -19,7 +19,7 @@ if [[ "${TESTMODE}" == "True" ]]; then
 else
     while true; do
         cd "${RDMO_APP_MP}"
-        python manage.py runserver 0.0.0.0:8080
+        python manage.py runserver 0.0.0.0:8000
         sleep 1
     done
 fi

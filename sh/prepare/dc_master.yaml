@@ -21,7 +21,7 @@ services:
         depends_on:
             - postgres
         ports:
-            - "8280:8080"
+            - "8280:8000"
         volumes:
             - rdmosrc:<RDMO_SOURCE_MP>
             - rdmoapp:<RDMO_APP_MP>
