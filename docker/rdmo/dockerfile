@@ -23,6 +23,7 @@ RUN apt install -y \
     zlib1g-dev \
     pandoc \
     procps \
+    net-tools \
     sudo
 
 # postgres and its dependencies
