@@ -9,8 +9,8 @@ mybins = "<HOME>/tools/mybins"
 rdmo_source = "/home/rdmo/rdmo"
 rdmo_app = "/home/rdmo/rdmo-app"
 rdmo_plugins = "/home/rdmo/rdmo-plugins"
-shed = "/vol/tools/shed"
-mybins = "/vol/tools/mybins"
+shed = "/vol/shed"
+mybins = "/vol/mybins"
 
 [repos]
 rdmo = "https://github.com/rdmorganiser/rdmo.git"

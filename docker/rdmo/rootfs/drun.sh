@@ -17,9 +17,5 @@ if [[ "${TESTMODE}" == "True" ]]; then
     echo "Run tests"
     cd "${RDMO_SOURCE_MP}" && pytest
 else
-    while true; do
-        cd "${RDMO_APP_MP}"
-        python manage.py runserver 0.0.0.0:8000
-        sleep 1
-    done
+    /vol/shed/supervisord -c ${HOME}/conf/supervisor.conf
 fi
