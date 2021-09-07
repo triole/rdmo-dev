@@ -11,5 +11,5 @@ echo -e "\nCMD: ${cmd}"
 echo -e "\nURL: ${url}"
 echo ""
 echo -n ${cmd} | xsel --clipboard
-eval ${cmd} | jq .
+eval ${cmd} | gojq .
 echo ""
