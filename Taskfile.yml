@@ -43,15 +43,15 @@ tasks:
 
     build_dockers:
         cmds:
-           - cmd: sudo docker-compose up --build -d
+           - cmd: docker-compose up --build -d
 
     remove:
         desc: remove rdmo's dockers
         cmds:
-           - cmd: sudo docker-compose down --rmi all
-           - cmd: sudo docker-compose rm --force
+           - cmd: docker-compose down --rmi all
+           - cmd: docker-compose rm --force
 
     log:
         desc: tail logs
         cmds:
-            - cmd: sudo docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'
+            - cmd: docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'
