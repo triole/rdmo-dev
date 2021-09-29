@@ -47,6 +47,9 @@ LANGUAGES = (
     ('it', ugettext_lazy('Italian')),
 )
 
+# enable auto save feature
+PROJECT_QUESTIONS_AUTOSAVE = True
+
 '''
 Debug mode, don't use this in production
 '''
