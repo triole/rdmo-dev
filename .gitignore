@@ -1,5 +1,6 @@
+.pytest_cache/
 tmp/
-docker-compose.yaml
 
+docker-compose.yaml
 .env
 variables.env
