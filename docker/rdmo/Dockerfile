@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:latest
 
 ENV USER=rdmo
 ENV UID=1000
