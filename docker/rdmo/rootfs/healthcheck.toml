@@ -1,0 +1,4 @@
+[req]
+url = [ "http://localhost:8000" ]
+x_status_code_equals = 200
+x_body_contains = '<a href="/account/login/">'

@@ -10,51 +10,31 @@ ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/shed:/vol/mybins"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# and build dependencies
-RUN apt update -y && apt install -y \
-    build-essential \
-    git \
-    libxml2-dev \
-    libxslt-dev \
-    zlib1g-dev \
-    pandoc \
-    procps \
-    net-tools \
-    sudo
+RUN apt update -y && apt install -y git procps net-tools
 
-# install python3
 RUN apt install -y python3 python3-dev python3-pip \
  && pip3 install pytest
 
 # postgres and its dependencies
-RUN apt install -y \
-    libpq-dev \
-    postgresql \
-    postgresql-client \
- && pip3 install psycopg2
+RUN apt install -y libpq-dev postgresql-client
+RUN pip3 install psycopg2
 
 # pip upgrade and rdmo installation
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade wheel
 RUN pip3 install --upgrade setuptools
 
-RUN rm -f /usr/bin/python \
-&& ln -s /usr/bin/python3 /usr/bin/python
-
-# note: texlive-xetex 1500MB, required otherwise tests will break
-RUN apt install -y texlive-xetex
+RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 
 COPY ./rootfs /
 
 RUN groupadd -g "${GID}" "${GNAME}" \
- && useradd -m -s /bin/false -g "${GNAME}" -u "${UID}" "${USER}" \
- && adduser "${USER}" "sudo" \
+ && useradd -m -s /bin/bash -g "${GNAME}" -u "${UID}" "${USER}" \
  && chown -R "${USER}:${GID}" "${HOME}" \
- && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/nopasswd \
  && chmod 777 /var/log
 
-HEALTHCHECK --timeout=5s --interval=600s --retries=3 \
-   CMD httpstat http://localhost:8000
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD webra /healthcheck.toml
 
 USER "${USER}"
 CMD ["/drun.sh"]
