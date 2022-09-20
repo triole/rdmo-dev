@@ -1,11 +1,14 @@
 FROM postgres:latest
 
-ENV PATH="${PATH}:/opt"
+ENV HOME="/root"
+ENV PATH="${PATH}:/opt:/vol/shed:/vol/bin"
 
 RUN apt update -y && apt install -y \
-    postgresql-client
+    curl postgresql-client
 
-COPY ./rootfs /
+RUN mkdir -p ${HOME}
+RUN curl --output ${HOME}/.bashrc \
+    https://raw.githubusercontent.com/triole/ghwfe/master/bashrc/default.sh
 
 # not necessary, but for sake of clarity
 CMD ["postgres"]

@@ -10,7 +10,7 @@ ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/shed:/vol/mybins"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt update -y && apt install -y git procps net-tools
+RUN apt update -y && apt install -y curl git procps net-tools
 
 RUN apt install -y python3 python3-dev python3-pip \
  && pip3 install pytest
@@ -27,6 +27,8 @@ RUN pip3 install --upgrade setuptools
 RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 
 COPY ./rootfs /
+RUN curl --output ${HOME}/.bashrc \
+    https://raw.githubusercontent.com/triole/ghwfe/master/bashrc/default.sh
 
 RUN groupadd -g "${GID}" "${GNAME}" \
  && useradd -m -s /bin/bash -g "${GNAME}" -u "${UID}" "${USER}" \
