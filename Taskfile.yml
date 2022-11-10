@@ -17,9 +17,8 @@ tasks:
     default:
         desc: default rdmo dockers build, from github master
         cmds:
-            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
-            - cmd: ./sh/prepare/render_variables_env.sh .
-            - task: build_dockers
+            - task: prep
+            - task: build
             - task: log
 
     test:
@@ -28,7 +27,7 @@ tasks:
             - cmd: ./sh/prepare/render_yaml.sh "{{.DC_TEMP}}" "{{.CONFIG}}"
             - cmd: >-
                     ./sh/prepare/render_variables_env.sh . . test
-            - task: build_dockers
+            - task: build
             - task: log
 
     testremote:
@@ -38,10 +37,16 @@ tasks:
             - cmd: >-
                     ./sh/prepare/render_variables_env.sh
                     "{{.REPO_RDMO}}" master test
-            - task: build_dockers
+            - task: build
             - task: log
 
-    build_dockers:
+    prep:
+        desc: run preparing operations
+        cmds:
+            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+            - cmd: ./sh/prepare/render_variables_env.sh .
+
+    build:
         cmds:
            - cmd: docker-compose up --build -d
 
