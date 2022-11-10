@@ -60,3 +60,17 @@ tasks:
         desc: tail logs
         cmds:
             - cmd: docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'
+
+    wait_for_up:
+        desc: wait for rdmo to be up and running
+        cmds:
+            - cmd: |
+                function wait_for_up(){
+                    echo "[$(date +%H:%M:%S)] Wait for RDMO to be up..."
+                    if [[ -z "$(curl -sI "http://localhost:8280"  | head -n 1 | grep "200")" ]]; then
+                        sleep 2
+                        wait_for_up
+                    fi
+                    echo "[$(date +%H:%M:%S)] RDMO is up and running"
+                }
+                wait_for_up
