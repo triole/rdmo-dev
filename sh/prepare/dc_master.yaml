@@ -1,59 +1,60 @@
+---
 version: "3.6"
 
 services:
-    postgres:
-        # image: postgres
-        build:
-            context: ./docker/postgres
-        container_name: postgres
-        ports:
-            - "6543:5432"
-        volumes:
-            - shed:<SHED_MP>:ro
-            - mybins:<MYBINS_MP>:ro
-        env_file:
-            - 'variables.env'
+  postgres:
+    # image: postgres
+    build:
+      context: ./docker/postgres
+    container_name: postgres
+    ports:
+      - "6543:5432"
+    volumes:
+      - shed:${SHED_MP}:ro
+      - mybins:${MYBINS_MP}:ro
+    env_file:
+      - 'variables.env'
 
-    rdmo:
-        build:
-            context: ./docker/rdmo
-        container_name: rdmo
-        depends_on:
-            - postgres
-        ports:
-            - "8280:8000"
-        volumes:
-            - rdmosrc:<RDMO_SOURCE_MP>
-            - rdmoapp:<RDMO_APP_MP>
-            - rdmoplugins:<RDMO_PLUGINS_MP>
-            - shed:<SHED_MP>:ro
-            - mybins:<MYBINS_MP>:ro
-        env_file:
-            - 'variables.env'
+  rdmo:
+    build:
+      context: ./docker/rdmo
+    container_name: rdmo
+    depends_on:
+      - postgres
+    ports:
+      - "8280:8000"
+    volumes:
+      - rdmosrc:${RDMO_SOURCE_MP}
+      - rdmoapp:${RDMO_APP_MP}
+      - rdmoplugins:${RDMO_PLUGINS_MP}
+      - shed:${SHED_MP}:ro
+      - mybins:${MYBINS_MP}:ro
+    env_file:
+      - 'variables.env'
 
 volumes:
-    rdmosrc:
-        driver_opts:
-            type: none
-            device: <RDMO_SOURCE_FOL>
-            o: bind
-    rdmoapp:
-        driver_opts:
-            type: none
-            device: <RDMO_APP_FOL>
-            o: bind
-    rdmoplugins:
-        driver_opts:
-            type: none
-            device: <RDMO_PLUGINS_FOL>
-            o: bind
-    shed:
-        driver_opts:
-            type: none
-            device: <SHED_FOL>
-            o: bind
-    mybins:
-        driver_opts:
-            type: none
-            device: <MYBINS_FOL>
-            o: bind
+  rdmosrc:
+    driver_opts:
+      type: none
+      device: ${RDMO_SOURCE_FOL}
+      o: bind
+  rdmoapp:
+    driver_opts:
+      type: none
+      device: ${RDMO_APP_FOL}
+      o: bind
+  rdmoplugins:
+    driver_opts:
+      type: none
+      device: ${RDMO_PLUGINS_FOL}
+      o: bind
+  shed:
+    driver_opts:
+      type: none
+      device: ${SHED_FOL}
+      o: bind
+  mybins:
+    driver_opts:
+      type: none
+      device: ${MYBINS_FOL}
+      o: bind

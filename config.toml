@@ -1,9 +1,9 @@
 [folders]
-rdmo_source = "<HOME>/rolling/aip/github/rdmo"
-rdmo_app = "<HOME>/rolling/aip/github/rdmo-app"
-rdmo_plugins = "<HOME>/rolling/aip/github/rdmo-plugins"
-shed = "<HOME>/tools/shed"
-mybins = "<HOME>/tools/mybins"
+rdmo_source = "${HOME}/rolling/aip/github/rdmo"
+rdmo_app = "${HOME}/rolling/aip/github/rdmo-app"
+rdmo_plugins = "${HOME}/rolling/aip/github/rdmo-plugins"
+shed = "${HOME}/tools/shed"
+mybins = "${HOME}/tools/mybins"
 
 [mountpoints]
 rdmo_source = "/home/rdmo/rdmo"
