@@ -1,76 +1,86 @@
+---
 version: '3'
 
+env:
+  UID:
+    sh: id -u
+  GID:
+    sh: id -g
+  RDMO_DOCKERFILE:
+    sh: stoml "$(pwd)/config.toml" rdmo_dockerfile
+
 vars:
-    CURDIR:
-        sh: pwd
-    CONFIG:
-        sh: echo "$(pwd)/config.toml"
-    DC_TEMP:
-        sh: echo "$(pwd)/docker-compose.yaml"
-    TEMPFILE: /tmp/rdmo-dev.tmp
-    LOCAL_RDMO:
-        sh: stoml "$(pwd)/config.toml" folders.rdmo_source
-    REPO_RDMO:
-        sh: stoml "$(pwd)/config.toml" repos.rdmo
+  CURDIR:
+    sh: pwd
+  CONFIG:
+    sh: echo "$(pwd)/config.toml"
+  DC_TEMP:
+    sh: echo "$(pwd)/docker-compose.yaml"
+  TEMPFILE: /tmp/rdmo-dev.tmp
+  LOCAL_RDMO:
+    sh: stoml "$(pwd)/config.toml" folders.rdmo_source
+  REPO_RDMO:
+    sh: stoml "$(pwd)/config.toml" repos.rdmo
 
 tasks:
-    default:
-        desc: default rdmo dockers build, from github master
-        cmds:
-            - task: prep
-            - task: build
-            - task: log
+  default:
+    desc: default rdmo dockers build, from github master
+    cmds:
+      - task: prep
+      - task: build
+      - task: log
 
-    test:
-        desc: test local rdmo source
-        cmds:
-            - cmd: ./sh/prepare/render_yaml.sh "{{.DC_TEMP}}" "{{.CONFIG}}"
-            - cmd: >-
-                    ./sh/prepare/render_variables_env.sh . . test
-            - task: build
-            - task: log
+  test:
+    desc: test local rdmo source
+    cmds:
+      - cmd: ./sh/prepare/render_yaml.sh "{{.DC_TEMP}}" "{{.CONFIG}}"
+      - cmd: >-
+          ./sh/prepare/render_variables_env.sh . . test
+      - task: build
+      - task: log
 
-    testremote:
-        desc: test remote rdmo source
-        cmds:
-            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
-            - cmd: >-
-                    ./sh/prepare/render_variables_env.sh
-                    "{{.REPO_RDMO}}" master test
-            - task: build
-            - task: log
+  testremote:
+    desc: test remote rdmo source
+    cmds:
+      - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+      - cmd: >-
+          ./sh/prepare/render_variables_env.sh "{{.REPO_RDMO}}"
+          master test
+      - task: build
+      - task: log
 
-    prep:
-        desc: run preparing operations
-        cmds:
-            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
-            - cmd: ./sh/prepare/render_variables_env.sh .
+  prep:
+    desc: run preparing operations
+    cmds:
+      - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+      - cmd: ./sh/prepare/render_variables_env.sh .
 
-    build:
-        cmds:
-           - cmd: docker-compose up --build -d
+  build:
+    cmds:
+      - cmd: docker-compose up --build -d
 
-    remove:
-        desc: remove rdmo's dockers
-        cmds:
-           - cmd: docker-compose down --rmi all
-           - cmd: docker-compose rm --force
+  remove:
+    desc: remove rdmo's dockers
+    cmds:
+      - cmd: docker-compose down --rmi all
+      - cmd: docker-compose rm --force
 
-    log:
-        desc: tail logs
-        cmds:
-            - cmd: docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1" 200'
+  log:
+    desc: tail logs
+    cmds:
+      - cmd: docker logs -f rdmo 2>&1 | grep -Ev '"GET / HTTP/1.1"
+          200'
 
-    wait_for_up:
-        desc: wait for rdmo to be up and running
-        cmds:
-            - cmd: |
-                function wait_for_up(){
-                    echo "[$(date +%H:%M:%S)] Wait for RDMO to be up..."
-                    if [[ -z "$(curl -sI "http://localhost:8280"  | head -n 1 | grep "200")" ]]; then
-                        sleep 2
-                        wait_for_up
-                    fi
-                    echo "[$(date +%H:%M:%S)] RDMO is up and running"
-                }
-                wait_for_up
+  wait_for_up:
+    desc: wait for rdmo to be up and running
+    cmds:
+      - cmd: |
+          function wait_for_up(){
+              echo "[$(date +%H:%M:%S)] Wait for RDMO to be up..."
+              if [[ -z "$(curl -sI "http://localhost:8280"  | head -n 1 | grep "200")" ]]; then
+                  sleep 2
+                  wait_for_up
+              fi
+              echo "[$(date +%H:%M:%S)] RDMO is up and running"
+          }
+          wait_for_up

@@ -18,6 +18,10 @@ services:
   rdmo:
     build:
       context: ./docker/rdmo
+      args:
+        UID: ${UID}
+        GID: ${GID}
+      dockerfile: Dockerfile.${RDMO_DOCKERFILE}
     container_name: rdmo
     depends_on:
       - postgres

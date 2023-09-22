@@ -1,3 +1,5 @@
+rdmo_dockerfile = "alpine"
+
 [folders]
 rdmo_source = "${HOME}/rolling/aip/github/rdmo"
 rdmo_app = "${HOME}/rolling/aip/github/rdmo-app"
