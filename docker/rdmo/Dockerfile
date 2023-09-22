@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+FROM debian:11
+# FROM ubuntu:latest
 
 ENV USER=rdmo
 ENV UID=1000
@@ -18,6 +19,9 @@ RUN apt install -y python3 python3-dev python3-pip \
 # postgres and its dependencies
 RUN apt install -y libpq-dev postgresql-client
 RUN pip3 install psycopg2
+RUN pip3 install django-allauth
+# RUN pip3 install pytz
+# RUN pip3 install tzdata
 
 # pip upgrade and rdmo installation
 RUN pip3 install --upgrade pip
@@ -28,7 +32,7 @@ RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 
 COPY ./rootfs /
 RUN curl --output ${HOME}/.bashrc \
-    https://raw.githubusercontent.com/triole/ghwfe/master/bashrc/default.sh
+  https://raw.githubusercontent.com/triole/ghwfe/master/bashrc/default.sh
 
 RUN groupadd -g "${GID}" "${GNAME}" \
  && useradd -m -s /bin/bash -g "${GNAME}" -u "${UID}" "${USER}" \
@@ -36,7 +40,7 @@ RUN groupadd -g "${GID}" "${GNAME}" \
  && chmod 777 /var/log
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD webra /healthcheck.toml
+CMD webra /healthcheck.toml
 
 USER "${USER}"
 CMD ["/drun.sh"]

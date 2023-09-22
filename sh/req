@@ -1,5 +1,4 @@
 #!/bin/bash
-
 args=${@}
 
 auth="Authorization: Token 6efe530eb10e3ce8d7dd7829a63152b428cc868d"

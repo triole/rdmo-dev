@@ -1,7 +1,7 @@
 import os
 import sys
 
-from django.utils.translation import gettext_lazy
+from django.utils.translation import ugettext_lazy
 from rdmo.core.settings import AUTHENTICATION_BACKENDS, INSTALLED_APPS, PROJECT_EXPORTS
 
 from . import BASE_DIR
@@ -30,21 +30,25 @@ THEME_DIR = os.path.join(BASE_DIR, "theme")
 
 # ex- and import plugins
 sys.path.append("/home/rdmo/rdmo-plugins")
-PROJECT_EXPORTS.append(("madmp", gettext_lazy("as madmp"), "exports.madmp.MaDMPExport"))
 PROJECT_EXPORTS.append(
-    ("datacite", gettext_lazy("as datacite"), "exports.datacite.DataCiteExport")
+    ("madmp", ugettext_lazy("as madmp"), "exports.madmp.MaDMPExport")
 )
-PROJECT_EXPORTS.append(("radar", gettext_lazy("as radar"), "exports.radar.RadarExport"))
-# PROJECT_IMPORTS.append(('xml', gettext_lazy('from RDMP XML'), 'rdmo.projects.imports.RDMOXMLImport'))
+PROJECT_EXPORTS.append(
+    ("datacite", ugettext_lazy("as datacite"), "exports.datacite.DataCiteExport")
+)
+PROJECT_EXPORTS.append(
+    ("radar", ugettext_lazy("as radar"), "exports.radar.RadarExport")
+)
+# PROJECT_IMPORTS.append(('xml', ugettext_lazy('from RDMP XML'), 'rdmo.projects.imports.RDMOXMLImport'))
 
 # languages
 LANGUAGE_CODE = "de-de"
 TIME_ZONE = "Europe/Berlin"
 LANGUAGES = (
-    ("en", gettext_lazy("English")),
-    ("de", gettext_lazy("German")),
-    ("fr", gettext_lazy("French")),
-    ("it", gettext_lazy("Italian")),
+    ("en", ugettext_lazy("English")),
+    ("de", ugettext_lazy("German")),
+    ("fr", ugettext_lazy("French")),
+    ("it", ugettext_lazy("Italian")),
 )
 
 # enable auto save feature
@@ -141,7 +145,6 @@ INSTALLED_APPS += [
 ]
 
 AUTHENTICATION_BACKENDS.append("allauth.account.auth_backends.AuthenticationBackend")
-MIDDLEWARE.append("allauth.account.middleware.AccountMiddleware")
 
 """
 LDAP, see also:
@@ -200,7 +203,7 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.htm
 """
 Export Formats
 """
-# from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _
 # EXPORT_FORMATS = (
 #     ('pdf', _('PDF')),
 #     ('rtf', _('Rich Text Format')),

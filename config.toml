@@ -7,7 +7,7 @@ mybins = "${HOME}/tools/mybins"
 
 [mountpoints]
 rdmo_source = "/home/rdmo/rdmo"
-rdmo_app = "/home/rdmo/rdmo-app"
+rdmo_app = "/home/rdmo/app"
 rdmo_plugins = "/home/rdmo/rdmo-plugins"
 shed = "/vol/shed"
 mybins = "/vol/mybins"

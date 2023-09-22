@@ -5,7 +5,7 @@ dc_target="${1}"
 conf="${2}"
 
 function gk() {
-    stoml "${conf}" "${1}" | envsubst
+  stoml "${conf}" "${1}" | envsubst
 }
 
 export RDMO_SOURCE_MP="$(gk "mountpoints.rdmo_source")"
