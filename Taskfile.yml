@@ -8,6 +8,9 @@ env:
     sh: id -g
   RDMO_DOCKERFILE:
     sh: stoml "$(pwd)/config.toml" rdmo_dockerfile
+  RDMO_CONTAINER_NAME: rdmo
+  LOCAL_RDMO:
+    sh: stoml "$(pwd)/config.toml" folders.rdmo_source | envsubst
 
 vars:
   CURDIR:
@@ -17,10 +20,8 @@ vars:
   DC_TEMP:
     sh: echo "$(pwd)/docker-compose.yaml"
   TEMPFILE: /tmp/rdmo-dev.tmp
-  LOCAL_RDMO:
-    sh: stoml "$(pwd)/config.toml" folders.rdmo_source
   REPO_RDMO:
-    sh: stoml "$(pwd)/config.toml" repos.rdmo
+    sh: stoml "$(pwd)/config.toml" repos.rdmo | envsubst
 
 tasks:
   default:
@@ -84,3 +85,12 @@ tasks:
               echo "[$(date +%H:%M:%S)] RDMO is up and running"
           }
           wait_for_up
+
+  make_release:
+    desc: make an rdmo release
+    dir: docker/rdmo
+    cmds:
+      - cmd: docker build --tag rdmo-make-release  -f Dockerfile.build
+          .
+      - cmd: docker run -d -v {{.LOCAL_RDMO}}:/home/usr/rdmo --name
+          rdmo-make-release rdmo-make-release

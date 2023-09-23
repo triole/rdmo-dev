@@ -4,7 +4,7 @@ ARG UID GID
 
 ENV USER=rdmo
 ENV GNAME=rdmo
-ENV HOME=/home/rdmo
+ENV HOME=/home/usr
 ENV UID="${UID}"
 ENV GID="${GID}"
 

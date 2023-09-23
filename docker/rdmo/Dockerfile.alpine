@@ -4,7 +4,7 @@ ARG UID GID
 
 ENV USER=usr
 ENV GROUP=grp
-ENV HOME=/home/rdmo
+ENV HOME=/home/usr
 ENV UID="${UID}"
 ENV GID="${GID}"
 ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/shed:/vol/mybins"

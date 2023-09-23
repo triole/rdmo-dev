@@ -15,7 +15,7 @@ services:
     env_file:
       - 'variables.env'
 
-  rdmo:
+  ${RDMO_CONTAINER_NAME}:
     build:
       context: ./docker/rdmo
       args:
