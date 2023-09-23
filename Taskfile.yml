@@ -86,11 +86,12 @@ tasks:
           }
           wait_for_up
 
-  make_release:
+  mr:
     desc: make an rdmo release
-    dir: docker/rdmo
+    dir: docker/make-release
     cmds:
-      - cmd: docker build --tag rdmo-make-release  -f Dockerfile.build
-          .
-      - cmd: docker run -d -v {{.LOCAL_RDMO}}:/home/usr/rdmo --name
-          rdmo-make-release rdmo-make-release
+      - cmd: docker build --build-arg UID={{.UID}} --build-arg
+          GID={{.GID}} --tag rdmo-make-release .
+      - cmd: docker run --rm -d -v {{.LOCAL_RDMO}}:/home/usr/rdmo
+          --name rdmo-make-release rdmo-make-release
+      - cmd: docker logs -f rdmo-make-release
