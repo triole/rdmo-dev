@@ -95,3 +95,12 @@ tasks:
       - cmd: docker run --rm -d -v {{.LOCAL_RDMO}}:/home/usr/rdmo
           --name rdmo-make-release rdmo-make-release
       - cmd: docker logs -f rdmo-make-release
+
+  upload_release:
+    desc: upload release to pypi
+    cmds:
+      - cmd: |
+          distfol="{{.LOCAL_RDMO}}/dist"
+          if [[ -d "${distfol}" ]]; then
+            twine upload -r rdmo ${distfol}/*
+          fi
