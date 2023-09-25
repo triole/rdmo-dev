@@ -25,7 +25,7 @@ RUN curl --output ${HOME}/.bashrc \
   https://raw.githubusercontent.com/triole/ghwfe/master/bashrc/default.sh
 
 WORKDIR ${HOME}
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 WORKDIR ${HOME}/rdmo
 CMD ["/make-release.sh"]
