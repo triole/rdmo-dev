@@ -12,6 +12,7 @@ ENV NVM_DIR="${HOME}/.nvm"
 
 RUN apk add --no-cache --update bash curl grep
 RUN apk add --no-cache --update python3 py3-pip
+RUN rm "$(find /usr/lib -type f -regex ".*python.*EXTERNALLY-MANAGED.*")"
 RUN apk add --no-cache --update nodejs npm
 
 COPY ./make-release.sh /
