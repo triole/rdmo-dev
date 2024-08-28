@@ -86,6 +86,11 @@ tasks:
           }
           wait_for_up
 
+  localize:
+    desc: poedit open rdmo localizations
+    cmds:
+      - cmd: sh/localize.sh
+
   mr:
     desc: make an rdmo release
     dir: docker/make-release
