@@ -16,6 +16,7 @@ RUN rm "$(find /usr/lib -type f -regex ".*python.*EXTERNALLY-MANAGED.*")"
 RUN apk add --no-cache --update nodejs npm
 
 COPY ./make-release.sh /
+RUN chmod 755 /make-release.sh
 
 RUN addgroup -g "${GID}" -S "${GROUP}"
 RUN adduser -S "${USER}" -u "${UID}" -G "${GROUP}" -h "${HOME}" -s "/bin/sh"

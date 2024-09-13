@@ -36,9 +36,11 @@ RUN curl --output ${HOME}/.bashrc \
 RUN addgroup -g "${GID}" -S "${GROUP}"
 RUN adduser -S "${USER}" -u "${UID}" -G "${GROUP}" -h "${HOME}" -s "/bin/sh"
 RUN chown -R "${USER}:${GID}" "${HOME}" /var/log
+RUN chmod -R 755 "/home"
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
 CMD webra /healthcheck.toml
 
+RUN chmod 755 /drun.sh
 USER "${USER}"
 CMD ["/drun.sh"]
