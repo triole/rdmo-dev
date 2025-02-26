@@ -86,7 +86,7 @@ tasks:
           }
           wait_for_up
 
-  localize:
+  locale:
     desc: poedit open rdmo localizations
     cmds:
       - cmd: sh/localize.sh

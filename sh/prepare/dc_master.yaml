@@ -21,7 +21,7 @@ services:
       args:
         UID: ${UID}
         GID: ${GID}
-      dockerfile: Dockerfile.${RDMO_DOCKERFILE}
+      dockerfile: Dockerfile
     container_name: rdmo
     depends_on:
       - postgres

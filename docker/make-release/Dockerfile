@@ -10,9 +10,14 @@ ENV GID="${GID}"
 ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/shed:/vol/mybins"
 ENV NVM_DIR="${HOME}/.nvm"
 
-RUN apk add --no-cache --update bash curl grep
-RUN apk add --no-cache --update python3 py3-pip
+RUN apk add --no-cache --update bash curl g++ gcc git grep procps musl-dev net-tools
+RUN apk add --no-cache --update python3 py3-pip python3-dev
 RUN rm "$(find /usr/lib -type f -regex ".*python.*EXTERNALLY-MANAGED.*")"
+
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade wheel
+RUN pip3 install --upgrade setuptools
+
 RUN apk add --no-cache --update nodejs npm
 
 COPY ./make-release.sh /
