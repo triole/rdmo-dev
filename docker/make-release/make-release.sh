@@ -11,11 +11,11 @@ pref() {
 nvm install "$(pref)"
 nvm use --delete-prefix "$(pref)"
 npm install
+
 pip install -e .
+
+python -m rdmo check
+rdmo-admin check
+
+pip install build
 rdmo-admin build
-
-sleep 99d
-
-# npm run build:prod &&
-# python -m pip install build &&
-# python -m build
