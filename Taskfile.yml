@@ -86,10 +86,12 @@ tasks:
           }
           wait_for_up
 
-  locale:
-    desc: poedit open rdmo localizations
+  oal:
+    desc: open all locale files
     cmds:
-      - cmd: sh/localize.sh
+      - cmd: |
+          find "{{.LOCAL_RDMO}}/rdmo/locale" -regex ".*\.po$" | sort \
+            | xargs -I{} nh poedit {}
 
   mr:
     desc: make an rdmo release
