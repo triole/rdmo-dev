@@ -10,7 +10,7 @@ ENV GID="${GID}"
 ENV PATH="${PATH}:${HOME}/.local/bin:${HOME}/sh:/vol/shed:/vol/mybins"
 
 RUN apk add --no-cache --update bash curl g++ gcc git grep procps musl-dev net-tools
-RUN apk add --no-cache --update python3 py3-pip python3-dev
+RUN apk add --no-cache --update python3 py3-pip python3-dev gettext
 RUN rm "$(find /usr/lib -type f -regex ".*python.*EXTERNALLY-MANAGED.*")"
 
 RUN pip3 install --upgrade pip
