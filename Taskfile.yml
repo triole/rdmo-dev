@@ -56,11 +56,17 @@ tasks:
       - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
       - cmd: ./sh/prepare/render_variables_env.sh .
 
+  rebuild:
+    desc: rebuild containers
+    cmds:
+      - task: rm
+      - task: build
+
   build:
     cmds:
       - cmd: docker-compose up --build -d
 
-  remove:
+  rm:
     desc: remove rdmo's dockers
     cmds:
       - cmd: docker-compose down --rmi all
