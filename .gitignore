@@ -1,6 +1,7 @@
 .pytest_cache/
 tmp/
 
+/conf.toml
 docker-compose.yaml
 .env
 variables.env

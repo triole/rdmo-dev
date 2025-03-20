@@ -25,5 +25,5 @@ postgres_password = "admin"
 postgres_db = "rdmo"
 postgres_host = "postgres"
 postgres_port = 5432
-api_dev_key = "58114e78e6c3488247148a3e5c9e6fa462a9e4c9"
+api_dev_key = "<VERY_SECRET_API_KEY>"
 install_source = "/home/rdmo/rdmo"
