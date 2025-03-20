@@ -7,21 +7,21 @@ env:
   GID:
     sh: id -g
   RDMO_DOCKERFILE:
-    sh: stoml "$(pwd)/config.toml" rdmo_dockerfile
+    sh: stoml "$(pwd)/conf.toml" rdmo_dockerfile
   RDMO_CONTAINER_NAME: rdmo
   LOCAL_RDMO:
-    sh: stoml "$(pwd)/config.toml" folders.rdmo_source | envsubst
+    sh: stoml "$(pwd)/conf.toml" folders.rdmo_source | envsubst
 
 vars:
   CURDIR:
     sh: pwd
   CONFIG:
-    sh: echo "$(pwd)/config.toml"
+    sh: echo "$(pwd)/conf.toml"
   DC_TEMP:
     sh: echo "$(pwd)/docker-compose.yaml"
   TEMPFILE: /tmp/rdmo-dev.tmp
   REPO_RDMO:
-    sh: stoml "$(pwd)/config.toml" repos.rdmo | envsubst
+    sh: stoml "$(pwd)/conf.toml" repos.rdmo | envsubst
 
 tasks:
   default:
