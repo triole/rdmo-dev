@@ -3,7 +3,7 @@ IFS=$' '
 scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 basedir="$(echo "${scriptdir}" | grep -Po "^.*(?=/.*/)")"
 
-config="${basedir}/config.toml"
+config="${basedir}/conf.toml"
 env_variables="${basedir}/variables.env"
 env_project_name="${basedir}/.env"
 
