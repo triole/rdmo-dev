@@ -96,8 +96,12 @@ tasks:
     desc: open all locale files
     cmds:
       - cmd: |
-          find "{{.LOCAL_RDMO}}/rdmo/locale" -regex ".*\.po$" | sort \
-            | xargs -I{} nh poedit {}
+          mapfile -t arr < <(find "{{.LOCAL_RDMO}}/rdmo/locale" -regex ".*\.po$" | sort)
+          for el in "${arr[@]}"; do
+            echo "open: ${el}"
+            nh poedit "${el}"
+            sleep 1s
+          done
 
   mr:
     desc: make an rdmo release
