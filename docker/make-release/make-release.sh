@@ -19,6 +19,6 @@ rdmo-admin check
 
 pip install build
 
-rdmo-admin messages make
-rdmo-admin messages compile
+# rdmo-admin messages make
+# rdmo-admin messages compile
 rdmo-admin build
